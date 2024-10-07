@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="h-screen bg-cover bg-center bg-no-repeat bg-[url('./background.webp')] flex items-center justify-center"
+  >
+    <div class="bg-white bg-opacity-5 p-8 rounded-md shadow-lg w-96">
+      <h2 class="text-2xl font-bold mb-6 text-center">Enter Below Details</h2>
+      <form id="userForm">
+        <div class="mb-4">
+          <input
+            type="text"
+            id="name"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Name"
+          />
+        </div>
+        <div class="mb-6">
+          <input
+            type="number"
+            id="age"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Age"
+          />
+        </div>
+          <button
+            type="submit"
+            class="w-full py-2 px-4 bg-teal-400 text-white font-semibold rounded-sm hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset focus:ring-teal-600"
+          >
+            Submit
+          </button>
+      </form>
+    </div>
+    <div id="userData">
+      
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
