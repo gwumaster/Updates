@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-blue-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4 text-center">To-Do List</h1>
+        <div class="mb-4">
+            <input id="new-task" class="border p-2 w-full rounded" type="text" placeholder="Add new task" />
+            <p id="error-message" class="text-red-500 text-sm mt-2 hidden">Task cannot be empty!</p>
+        </div>
+        <button id="add-task" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full mb-4">
+            Add Task
+        </button>
+        <ul id="task-list" class="space-y-3">
+            <!-- Tasks will appear here -->
+        </ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
