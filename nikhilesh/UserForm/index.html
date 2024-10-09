@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Data Form</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div class="w-full max-w-2xl p-6 bg-yellow-100 rounded shadow">
+    <h2 class="text-2xl font-bold mb-4 text-center">User Information</h2>
+    
+    <!-- User Input Form -->
+    <form id="userForm" class="mb-6">
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700">Name:</label>
+        <input type="text" id="name" name="name" required
+               class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
+      </div>
+      
+      <div class="mb-4">
+        <label for="age" class="block text-gray-700">Age:</label>
+        <input type="number" id="age" name="age" required min="0"
+               class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
+      </div>
+      
+      <button type="submit"
+              class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
+        Submit
+      </button>
+    </form>
+    
+    <!-- Display Users Table -->
+    <div>
+      <h3 class="text-xl font-semibold mb-2">Stored Users</h3>
+      <table class="w-full bg-white shadow rounded">
+        <thead>
+          <tr>
+            <th class="px-4 py-2 border">#</th>
+            <th class="px-4 py-2 border">Name</th>
+            <th class="px-4 py-2 border">Age</th>
+          </tr>
+        </thead>
+        <tbody id="usersTableBody">
+          <!-- Dynamic Content -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Function to retrieve users from localStorage
+    function getUsers() {
+      const users = localStorage.getItem('users');
+      //const users = sessionStorage.getItem('users');
+      return users ? JSON.parse(users) : [];
+    }
+
+    // Function to save users to localStorage
+    function saveUsers(users) {
+      localStorage.setItem('users', JSON.stringify(users));
+      //sessionStorage.setItem('users', JSON.stringify(users));
+    }
+
+    // Function to render users in the table
+    function renderUsers() {
+      const users = getUsers();
+      const tableBody = document.getElementById('usersTableBody');
+      tableBody.innerHTML = ''; // Clear existing content
+
+      users.forEach((user, index) => {
+        const row = document.createElement('tr');
+
+        // Index Cell
+        const indexCell = document.createElement('td');
+        indexCell.className = 'px-4 py-2 border text-center';
+        indexCell.textContent = index + 1;
+        row.appendChild(indexCell);
+
+        // Name Cell
+        const nameCell = document.createElement('td');
+        nameCell.className = 'px-4 py-2 border';
+        nameCell.textContent = user.name;
+        row.appendChild(nameCell);
+
+        // Age Cell
+        const ageCell = document.createElement('td');
+        ageCell.className = 'px-4 py-2 border text-center';
+        ageCell.textContent = user.age;
+        row.appendChild(ageCell);
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Handle form submission
+    document.getElementById('userForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent form from submitting normally
+
+      const nameInput = document.getElementById('name');
+      const ageInput = document.getElementById('age');
+
+      const name = nameInput.value.trim();
+      const age = parseInt(ageInput.value, 10);
+
+      if (name && !isNaN(age)) {
+        const users = getUsers();
+        users.push({ name, age });
+        saveUsers(users);
+        renderUsers();
+
+        // Clear form fields
+        nameInput.value = '';
+        ageInput.value = '';
+      }
+    });
+
+    // Initial render on page load
+    document.addEventListener('DOMContentLoaded', renderUsers);
+  </script>
+
+</body>
+</html>
